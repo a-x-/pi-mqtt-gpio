@@ -951,7 +951,7 @@ def hass_announce_digital_input(in_conf, topic_prefix, mqtt_config):
         "payload_off": in_conf["off_payload"],
         "device": {
             "manufacturer": "MQTT GPIO",
-            "identifiers": ["mqtt-gpio", device_id],
+            "identifiers": [device_id],
             "name": mqtt_config["discovery_name"],
         },
         **in_conf.get("extra_announce_payload", {}),
@@ -991,7 +991,7 @@ def hass_announce_digital_output(out_conf, topic_prefix, mqtt_config):
         "payload_off": out_conf["off_payload"],
         "device": {
             "manufacturer": "MQTT GPIO",
-            "identifiers": ["mqtt-gpio", device_id],
+            "identifiers": [device_id],
             "name": mqtt_config["discovery_name"],
         },
         **({"device_class": device_class} if device_class else {}),
@@ -1029,7 +1029,7 @@ def hass_announce_sensor_input(in_conf, topic_prefix, mqtt_config):
         "expire_after":  expire_after if expire_after else 2 * int(in_conf.get("interval", "60")) + 5,
         "device": {
             "manufacturer": "MQTT GPIO",
-            "identifiers": ["mqtt-gpio", device_id],
+            "identifiers": [device_id],
             "name": mqtt_config["discovery_name"],
         },
         **in_conf.get("extra_announce_payload", {}),
