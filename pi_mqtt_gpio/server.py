@@ -959,7 +959,7 @@ def hass_announce_digital_input(in_conf, topic_prefix, mqtt_config):
 
     client.publish(
         "%s/%s/%s/%s/config"
-        % (mqtt_config["discovery_prefix"], in_conf. get("component", "binary_sensor"), device_id, sensor_name),
+        % (mqtt_config["discovery_prefix"], in_conf.get("component", "binary_sensor"), device_id, sensor_name),
         payload=json.dumps(sensor_config),
         retain=True,
     )
@@ -977,6 +977,7 @@ def hass_announce_digital_output(out_conf, topic_prefix, mqtt_config):
         "pi-mqtt-gpio-%s" % sha1(topic_prefix.encode("utf8")).hexdigest()[:8]
     )  # TODO: Unify with MQTT Client ID
     sensor_name = out_conf["name"]
+    device_class = out_conf.get("device_class")
     sensor_config = {
         "name": sensor_name,
         "unique_id": "%s_%s_output_%s" % (device_id, out_conf["module"], sensor_name),
@@ -988,18 +989,18 @@ def hass_announce_digital_output(out_conf, topic_prefix, mqtt_config):
         "payload_not_available": mqtt_config["status_payload_dead"],
         "payload_on": out_conf["on_payload"],
         "payload_off": out_conf["off_payload"],
-        "device_class": out_conf.get("device_class", "none"),
         "device": {
             "manufacturer": "MQTT GPIO",
             "identifiers": ["mqtt-gpio", device_id],
             "name": mqtt_config["discovery_name"],
         },
+        **({"device_class": device_class} if device_class else {}),
         **out_conf.get("extra_announce_payload", {}),
     }
 
     client.publish(
         "%s/%s/%s/%s/config"
-        % (mqtt_config["discovery_prefix"], out_conf. get("component", "switch"), device_id, sensor_name),
+        % (mqtt_config["discovery_prefix"], out_conf.get("component", "switch"), device_id, sensor_name),
         payload=json.dumps(sensor_config),
         retain=True,
     )
