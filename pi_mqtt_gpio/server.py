@@ -988,7 +988,7 @@ def hass_announce_digital_output(out_conf, topic_prefix, mqtt_config):
         "payload_not_available": mqtt_config["status_payload_dead"],
         "payload_on": out_conf["on_payload"],
         "payload_off": out_conf["off_payload"],
-        "device_class": out_conf["device_class"],
+        "device_class": out_conf.get("device_class", "none"),
         "device": {
             "manufacturer": "MQTT GPIO",
             "identifiers": ["mqtt-gpio", device_id],
