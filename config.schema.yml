@@ -350,6 +350,10 @@ sensor_inputs:
         type: integer
         required: no
         min: 1
+      extra_announce_payload:
+        type: dict
+        allow_unknown: yes
+        schema: {}
 
 stream_reads:
   type: list
