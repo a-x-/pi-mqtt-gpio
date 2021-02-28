@@ -1,3 +1,15 @@
+# FORK (ha-patches branch)
+```yaml
+interrupt_payload_reset: OFF # e.g. for motion sensor which doesn't send clear signal
+
+expire_after: # N seconds. e.g. for dht22 which doesn't get regular probes
+
+extra_announce_payload:
+      device_class: "motion" # https://www.home-assistant.io/integrations/sensor/#device-class
+
+component: # e.g. "light" instead switch
+```
+
 # MQTT IO
 
 [![Discord](https://img.shields.io/discord/713749043662290974.svg?label=Chat%20on%20Discord&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/gWyV9W4)
